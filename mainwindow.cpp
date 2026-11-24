@@ -8,6 +8,7 @@
 #include <QPainterPath>
 #include <QDateTime>
 #include <QMessageBox>
+#include <QDialog>
 #include <QFileDialog>
 #include <QHeaderView>
 #include <QSysInfo>
@@ -24,6 +25,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Responsive layout proportions: lock sidebar width and distribute cards evenly
+    ui->mainHorizontalLayout->setStretch(0, 0);
+    ui->mainHorizontalLayout->setStretch(1, 1);
+
+    ui->row1StatsLayout->setStretch(0, 1);
+    ui->row1StatsLayout->setStretch(1, 1);
+    ui->row1StatsLayout->setStretch(2, 1);
+
+    ui->graphAndRatesLayout->setStretch(0, 1);
+    ui->graphAndRatesLayout->setStretch(1, 0);
 
     // 1. Install Custom Auto-Scaling Dual-Curve Throughput Widget
     mGraphWidget = new ThroughputGraphWidget(this);
@@ -728,9 +740,159 @@ void MainWindow::onApplySettingsClicked()
 
 void MainWindow::onAboutClicked()
 {
-    QMessageBox::about(this, "About Network Manager",
-                       "<h3>Network Manager</h3>"
-                       "<p><b>Version:</b> 2.0 (Executive NOC &amp; Wireshark Edition)</p>"
-                       "<p>Real-time network telemetry, active socket tracking, and full Wireshark-grade 3-pane packet analysis suite built with Qt 6.</p>"
-                       "<p>© 2026 NetmanQt Project. Genuine hardware and kernel metrics.</p>");
+    if (ui->btnNavAbout) {
+        ui->btnNavAbout->setChecked(false);
+    }
+
+    QDialog dlg(this);
+    dlg.setWindowTitle("About Netman");
+    dlg.setWindowModality(Qt::ApplicationModal);
+    dlg.setFixedSize(500, 470);
+    dlg.setStyleSheet(
+        "QDialog {"
+        "  background-color: #ffffff;"
+        "  border: 1px solid #cbd5e1;"
+        "  border-radius: 12px;"
+        "}"
+        "QLabel {"
+        "  background: transparent;"
+        "  border: none;"
+        "}"
+        "#specBox {"
+        "  background-color: #f8fafc;"
+        "  border: 1px solid #e2e8f0;"
+        "  border-radius: 8px;"
+        "}"
+        "#specBox QLabel {"
+        "  border: none;"
+        "  background: transparent;"
+        "}"
+        "QPushButton {"
+        "  background-color: #0f172a;"
+        "  color: #ffffff;"
+        "  border: 1px solid #0f172a;"
+        "  border-radius: 6px;"
+        "  padding: 8px 24px;"
+        "  font-weight: 600;"
+        "  font-size: 13px;"
+        "}"
+        "QPushButton:hover {"
+        "  background-color: #1e293b;"
+        "}"
+    );
+
+    QVBoxLayout *layout = new QVBoxLayout(&dlg);
+    layout->setContentsMargins(28, 28, 28, 24);
+    layout->setSpacing(14);
+
+    // Header layout with Logo and Titles
+    QHBoxLayout *headerLayout = new QHBoxLayout();
+    headerLayout->setSpacing(16);
+
+    QLabel *logoLabel = new QLabel(&dlg);
+    {
+        QPixmap pix(54, 54);
+        pix.fill(Qt::transparent);
+        QPainter p(&pix);
+        p.setRenderHint(QPainter::Antialiasing);
+
+        p.setBrush(QColor("#0f172a"));
+        p.setPen(Qt::NoPen);
+        p.drawRoundedRect(0, 0, 54, 54, 12, 12);
+
+        p.setPen(QPen(QColor("#38bdf8"), 2.2, Qt::SolidLine, Qt::RoundCap));
+        p.drawLine(15, 39, 27, 15);
+        p.drawLine(27, 15, 39, 39);
+        p.drawLine(15, 39, 39, 39);
+
+        p.setBrush(QColor("#ffffff"));
+        p.setPen(QPen(QColor("#0284c7"), 1.8));
+        p.drawEllipse(QPointF(27, 15), 4.5, 4.5);
+        p.drawEllipse(QPointF(15, 39), 3.8, 3.8);
+        p.drawEllipse(QPointF(39, 39), 3.8, 3.8);
+
+        logoLabel->setPixmap(pix);
+    }
+    headerLayout->addWidget(logoLabel);
+
+    QVBoxLayout *titleCol = new QVBoxLayout();
+    titleCol->setSpacing(3);
+
+    QHBoxLayout *nameRow = new QHBoxLayout();
+    nameRow->setSpacing(8);
+
+    QLabel *lblName = new QLabel("NETMAN", &dlg);
+    lblName->setStyleSheet("font-size: 22px; font-weight: 800; color: #0f172a; letter-spacing: 0.5px;");
+    nameRow->addWidget(lblName);
+
+    QLabel *badge = new QLabel("Executive NOC", &dlg);
+    badge->setStyleSheet("background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; "
+                         "font-size: 11px; font-weight: 700; border-radius: 4px; padding: 2px 7px;");
+    nameRow->addWidget(badge);
+    nameRow->addStretch();
+    titleCol->addLayout(nameRow);
+
+    QLabel *lblSub = new QLabel("Version 2.0 · Wireshark-Grade Telemetry & Analysis", &dlg);
+    lblSub->setStyleSheet("color: #64748b; font-size: 12px; font-weight: 500;");
+    titleCol->addWidget(lblSub);
+
+    headerLayout->addLayout(titleCol);
+    layout->addLayout(headerLayout);
+
+    // Divider line
+    QFrame *line = new QFrame(&dlg);
+    line->setFrameShape(QFrame::HLine);
+    line->setStyleSheet("border: none; background-color: #e2e8f0; max-height: 1px;");
+    layout->addWidget(line);
+
+    // Description text
+    QLabel *lblDesc = new QLabel(
+        "Production-grade network monitoring suite designed for high-precision real-time metrics, "
+        "hardware diagnostics, active socket tracking, and full 3-pane packet dissection.",
+        &dlg);
+    lblDesc->setWordWrap(true);
+    lblDesc->setStyleSheet("color: #334155; font-size: 13px; line-height: 1.4;");
+    layout->addWidget(lblDesc);
+
+    // Feature highlights box
+    QFrame *specBox = new QFrame(&dlg);
+    specBox->setObjectName("specBox");
+    QVBoxLayout *specLayout = new QVBoxLayout(specBox);
+    specLayout->setSpacing(7);
+    specLayout->setContentsMargins(14, 12, 14, 12);
+
+    auto addSpec = [&](const QString &icon, const QString &title, const QString &desc) {
+        QLabel *l = new QLabel(QString("<b>%1 %2:</b> <span style='color:#64748b;'>%3</span>").arg(icon, title, desc), specBox);
+        l->setStyleSheet("color: #0f172a; font-size: 12px; border: none; background: transparent;");
+        specLayout->addWidget(l);
+    };
+
+    addSpec("⚡", "Kernel Telemetry", "Real hardware & adapter byte counters via WSL/Win32");
+    addSpec("📊", "Dual-Curve Engine", "Zero-jank auto-scaling bandwidth waveform");
+    addSpec("🔍", "Wireshark 3-Pane", "Live sniffing, tree protocol decode & hex inspector");
+    addSpec("🛡️", "Sockets & Security", "Process-to-port mapping and subnet ping scanner");
+
+    layout->addWidget(specBox);
+
+    // Environment info
+    QLabel *lblEnv = new QLabel(
+        QString("Built with Qt %1 · C++17 · %2\n© 2026 NetmanQt Project. Genuine hardware and kernel metrics.")
+            .arg(QT_VERSION_STR, QSysInfo::prettyProductName()),
+        &dlg);
+    lblEnv->setStyleSheet("color: #94a3b8; font-size: 11px;");
+    lblEnv->setAlignment(Qt::AlignLeft);
+    layout->addWidget(lblEnv);
+
+    // Bottom Action Row
+    QHBoxLayout *btnRow = new QHBoxLayout();
+    btnRow->addStretch();
+
+    QPushButton *btnClose = new QPushButton("Close", &dlg);
+    btnClose->setCursor(Qt::PointingHandCursor);
+    connect(btnClose, &QPushButton::clicked, &dlg, &QDialog::accept);
+    btnRow->addWidget(btnClose);
+
+    layout->addLayout(btnRow);
+
+    dlg.exec();
 }

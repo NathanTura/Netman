@@ -54,7 +54,9 @@ void ThroughputGraphWidget::addSample(double downMbps, double upMbps)
     double target = peak * 1.25;
     double newScale = 2.0;
 
-    if (target <= 2.0)        newScale = 2.0;
+    if (target <= 0.5)        newScale = 0.5;
+    else if (target <= 1.0)   newScale = 1.0;
+    else if (target <= 2.0)   newScale = 2.0;
     else if (target <= 5.0)   newScale = 5.0;
     else if (target <= 10.0)  newScale = 10.0;
     else if (target <= 20.0)  newScale = 20.0;
@@ -128,7 +130,7 @@ void ThroughputGraphWidget::paintEvent(QPaintEvent *)
     p.drawText(QRect(0, yBtm - 8, leftPadding - 12, 16), Qt::AlignRight | Qt::AlignVCenter, btmLabel);
 
     // Subtle dotted horizontal grid lines
-    QPen gridPen(QColor("#f1f5f9"), 1, Qt::DashLine);
+    QPen gridPen(QColor("#e2e8f0"), 1, Qt::DashLine);
     p.setPen(gridPen);
     p.drawLine(leftPadding, yTop, leftPadding + plotWidth, yTop);
     p.drawLine(leftPadding, yMid, leftPadding + plotWidth, yMid);

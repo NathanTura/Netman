@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QStackedWidget>
 #include <QPushButton>
+#include <QDialog>
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,26 @@ int main(int argc, char *argv[])
             QPushButton *btn = w.findChild<QPushButton*>("btnNavPackets");
             if (btn) btn->setChecked(true);
         }
+    }
+
+    int aboutIdx = args.indexOf("--about-screenshot");
+    if (aboutIdx != -1 && aboutIdx + 1 < args.size()) {
+        QString outPath = args.at(aboutIdx + 1);
+        QTimer::singleShot(600, [&w, outPath]() {
+            QPushButton *btn = w.findChild<QPushButton*>("btnNavAbout");
+            QTimer::singleShot(400, [outPath]() {
+                for (QWidget *top : QApplication::topLevelWidgets()) {
+                    if (qobject_cast<QDialog*>(top)) {
+                        QPixmap pix = top->grab();
+                        pix.save(outPath, "PNG");
+                        top->close();
+                        QApplication::quit();
+                        return;
+                    }
+                }
+            });
+            if (btn) btn->click();
+        });
     }
 
     int idx = args.indexOf("--screenshot");

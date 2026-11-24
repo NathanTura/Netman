@@ -256,6 +256,38 @@ QLineEdit:focus, QComboBox:focus {
     color: #0f172a;
     padding: 8px;
 }
+
+/* Modern Dialog and Message Box Styles (Immune to OS Dark Mode Glitches) */
+QDialog, QMessageBox {
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+QMessageBox QLabel, QDialog QLabel {
+    color: #0f172a;
+    font-size: 12px;
+    background: transparent;
+}
+
+QMessageBox QPushButton, QDialog QPushButton {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: 1px solid #0f172a;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 70px;
+}
+
+QMessageBox QPushButton:hover, QDialog QPushButton:hover {
+    background-color: #1e293b;
+    border-color: #1e293b;
+}
+
+QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {
+    background-color: #334155;
+}
    </string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -275,9 +307,14 @@ QLineEdit:focus, QComboBox:focus {
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <!-- LEFT SIDEBAR -->
     <item>
      <widget class="QWidget" name="leftSidebar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
         <width>230</width>
@@ -291,1179 +328,1534 @@ QLineEdit:focus, QComboBox:focus {
        </size>
       </property>
       <layout class="QVBoxLayout" name="sidebarLayout">
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <property name="leftMargin">
-        <number>16</number>
-       </property>
-       <property name="topMargin">
-        <number>20</number>
-       </property>
-       <property name="rightMargin">
-        <number>16</number>
-       </property>
-       <property name="bottomMargin">
-        <number>16</number>
-       </property>
-       <!-- App Branding -->
-       <item>
-        <layout class="QHBoxLayout" name="brandLayout">
-         <property name="spacing">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>20</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="brandLayout">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="brandIcon">
+          <property name="minimumSize">
+           <size>
+            <width>36</width>
+            <height>36</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>36</width>
+            <height>36</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="brandTextLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="brandTitle">
+            <property name="text">
+             <string>NETMAN</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="spBrandBelow">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>12</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblSecMonitoring">
+        <property name="text">
+         <string>MONITORING</string>
+        </property>
+        <property name="class" stdset="0">
+         <string>sidebarSection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavDashboard">
+        <property name="text">
+         <string>Dashboard</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavPackets">
+        <property name="text">
+         <string>Packet Analyzer</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblSecDiagnostics">
+        <property name="text">
+         <string>DIAGNOSTICS</string>
+        </property>
+        <property name="class" stdset="0">
+         <string>sidebarSection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavTools">
+        <property name="text">
+         <string>Network Tools</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavHosts">
+        <property name="text">
+         <string>Hosts Monitor</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavPorts">
+        <property name="text">
+         <string>Ports &amp;&amp; Sockets</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="spSidebarPush">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblSecSystem">
+        <property name="text">
+         <string>SYSTEM</string>
+        </property>
+        <property name="class" stdset="0">
+         <string>sidebarSection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavSettings">
+        <property name="text">
+         <string>Preferences</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNavAbout">
+        <property name="text">
+         <string>About Netman</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="class" stdset="0">
+         <string>navBtn</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="statusPillCard">
+        <layout class="QHBoxLayout" name="statusPillLayout">
+         <property name="leftMargin">
           <number>10</number>
          </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
          <item>
-          <widget class="QLabel" name="brandIcon">
-           <property name="minimumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
+          <widget class="QLabel" name="statusDot">
+           <property name="styleSheet">
+            <string notr="true">color: #16a34a; font-size: 11px;</string>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
+           <property name="text">
+            <string>●</string>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="brandTextLayout">
-           <property name="spacing">
-            <number>0</number>
+          <widget class="QLabel" name="lblSidebarStatus">
+           <property name="styleSheet">
+            <string notr="true">color: #475569; font-weight: 600; font-size: 11px;</string>
            </property>
-           <item>
-            <widget class="QLabel" name="brandTitle">
-             <property name="text">
-              <string>NETMAN</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="brandSubtitle">
-             <property name="text">
-              <string>NOC SUITE v2.0</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <!-- Spacer below brand -->
-       <item>
-        <spacer name="spBrandBelow">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>12</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <!-- Section: MONITORING -->
-       <item>
-        <widget class="QLabel" name="lblSecMonitoring">
-         <property name="class" stdset="0">
-          <string>sidebarSection</string>
-         </property>
-         <property name="text">
-          <string>MONITORING</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavDashboard">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Dashboard</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavPackets">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Packet Analyzer</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <!-- Section: DIAGNOSTICS -->
-       <item>
-        <widget class="QLabel" name="lblSecDiagnostics">
-         <property name="class" stdset="0">
-          <string>sidebarSection</string>
-         </property>
-         <property name="text">
-          <string>DIAGNOSTICS</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavTools">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Network Tools</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavHosts">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Hosts Monitor</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavPorts">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Ports &amp;&amp; Sockets</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <!-- Spacer push bottom -->
-       <item>
-        <spacer name="spSidebarPush">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <!-- Section: SYSTEM -->
-       <item>
-        <widget class="QLabel" name="lblSecSystem">
-         <property name="class" stdset="0">
-          <string>sidebarSection</string>
-         </property>
-         <property name="text">
-          <string>SYSTEM</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavSettings">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>Preferences</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnNavAbout">
-         <property name="class" stdset="0">
-          <string>navBtn</string>
-         </property>
-         <property name="text">
-          <string>About Netman</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <!-- Online Status Capsule -->
-       <item>
-        <widget class="QFrame" name="statusPillCard">
-         <layout class="QHBoxLayout" name="statusPillLayout">
-          <property name="leftMargin">
-           <number>10</number>
-          </property>
-          <property name="topMargin">
-           <number>5</number>
-          </property>
-          <property name="rightMargin">
-           <number>10</number>
-          </property>
-          <property name="bottomMargin">
-           <number>5</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="statusDot">
-            <property name="text">
-             <string>●</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: #16a34a; font-size: 11px;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lblSidebarStatus">
-            <property name="text">
-             <string>Systems Nominal</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: #475569; font-weight: 600; font-size: 11px;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="spStatusPill">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <!-- MAIN CONTENT AREA -->
-    <item>
-     <widget class="QWidget" name="mainContentArea">
-      <layout class="QVBoxLayout" name="mainContentLayout">
-       <property name="spacing">
-        <number>16</number>
-       </property>
-       <property name="leftMargin">
-        <number>20</number>
-       </property>
-       <property name="topMargin">
-        <number>18</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>18</number>
-       </property>
-       <!-- Top Header Row -->
-       <item>
-        <layout class="QHBoxLayout" name="topHeaderLayout">
-         <item>
-          <layout class="QVBoxLayout" name="greetingLayout">
-           <property name="spacing">
-            <number>2</number>
+           <property name="text">
+            <string>Systems Nominal</string>
            </property>
-           <item>
-            <widget class="QLabel" name="lblGreeting">
-             <property name="text">
-              <string>Network Operations Center</string>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font-size: 20px; font-weight: 800; color: #0f172a;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblNetworkStatus">
-             <property name="text">
-              <string>Active Interface: Wi-Fi · Gateway: 172.20.10.1 · State: Online</string>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: #64748b; font-size: 12px; font-weight: 500;</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          </widget>
          </item>
          <item>
-          <spacer name="spTopHeader">
+          <spacer name="spStatusPill">
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
            </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
           </spacer>
          </item>
-         <!-- Clock Pill Badge -->
-         <item>
-          <widget class="QLabel" name="lblClockPill">
-           <property name="text">
-            <string>● LIVE   21:44:00 LOCAL</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
         </layout>
-       </item>
-       <!-- Stacked Widget Pages -->
-       <item>
-        <widget class="QStackedWidget" name="stackedWidget">
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <!-- PAGE 0: DASHBOARD -->
-         <widget class="QWidget" name="pageDashboard">
-          <layout class="QVBoxLayout" name="pageDashLayout">
-           <property name="spacing">
-            <number>16</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <!-- ROW 1: TOP 3 STAT CARDS -->
-           <item>
-            <layout class="QHBoxLayout" name="row1StatsLayout">
-             <property name="spacing">
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="mainContentLayout">
+      <property name="spacing">
+       <number>16</number>
+      </property>
+      <property name="leftMargin">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>18</number>
+      </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
+      <property name="bottomMargin">
+       <number>18</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="topHeaderLayout">
+        <item>
+         <layout class="QVBoxLayout" name="greetingLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblGreeting">
+            <property name="styleSheet">
+             <string notr="true">font-size: 20px; font-weight: 800; color: #0f172a;</string>
+            </property>
+            <property name="text">
+             <string>Network Operations Center</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblNetworkStatus">
+            <property name="styleSheet">
+             <string notr="true">color: #64748b; font-size: 12px; font-weight: 500;</string>
+            </property>
+            <property name="text">
+             <string>Active Interface: Wi-Fi · Gateway: 172.20.10.1 · State: Online</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="spTopHeader">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblClockPill">
+          <property name="text">
+           <string>● LIVE   21:44:00 LOCAL</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="pageDashboard">
+         <layout class="QVBoxLayout" name="pageDashLayout">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="row1StatsLayout">
+            <property name="spacing">
+             <number>14</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="cardIp">
+              <layout class="QVBoxLayout" name="cardIpLayout">
+               <property name="spacing">
+                <number>4</number>
+               </property>
+               <property name="leftMargin">
+                <number>18</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>18</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="headIpLayout">
+                 <item>
+                  <widget class="QLabel" name="lblIpTag">
+                   <property name="text">
+                    <string>LOCAL IP ADDRESS</string>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>cardLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="spHeadIp">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblIpBadge">
+                   <property name="styleSheet">
+                    <string notr="true">color: #2563eb; background: #eff6ff; border: 1px solid #bfdbfe; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
+                   </property>
+                   <property name="text">
+                    <string>IPv4</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblValIp">
+                 <property name="text">
+                  <string>172.18.144.100</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>cardValueMedium</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="cardGateway">
+              <layout class="QVBoxLayout" name="cardGwLayout">
+               <property name="spacing">
+                <number>4</number>
+               </property>
+               <property name="leftMargin">
+                <number>18</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>18</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="headGwLayout">
+                 <item>
+                  <widget class="QLabel" name="lblGwTag">
+                   <property name="text">
+                    <string>DEFAULT GATEWAY</string>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>cardLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="spHeadGw">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblGwBadge">
+                   <property name="styleSheet">
+                    <string notr="true">color: #7c3aed; background: #f5f3ff; border: 1px solid #ddd6fe; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
+                   </property>
+                   <property name="text">
+                    <string>Router</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblValGateway">
+                 <property name="text">
+                  <string>172.18.144.1</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>cardValueMedium</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="cardDns">
+              <layout class="QVBoxLayout" name="cardDnsLayout">
+               <property name="spacing">
+                <number>4</number>
+               </property>
+               <property name="leftMargin">
+                <number>18</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>18</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="headDnsLayout">
+                 <item>
+                  <widget class="QLabel" name="lblDnsTag">
+                   <property name="text">
+                    <string>DNS</string>
+                   </property>
+                   <property name="class" stdset="0">
+                    <string>cardLabel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="spHeadDns">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblDnsBadge">
+                   <property name="styleSheet">
+                    <string notr="true">color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
+                   </property>
+                   <property name="text">
+                    <string>UDP/53</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblValDns">
+                 <property name="text">
+                  <string>8.8.8.8</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>cardValueMedium</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QFrame" name="cardOverview">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QVBoxLayout" name="overviewLayout">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>18</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>18</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="overviewHeaderLayout">
+               <item>
+                <widget class="QLabel" name="lblOverviewTitle">
+                 <property name="text">
+                  <string>Network Throughput &amp; Telemetry</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>cardHeader</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spOverviewHeader">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblOverviewStatus">
+                 <property name="styleSheet">
+                  <string notr="true">color: #16a34a; font-weight: 600; font-size: 11px;</string>
+                 </property>
+                 <property name="text">
+                  <string>● Live Telemetry</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="graphAndRatesLayout">
+               <property name="spacing">
+                <number>20</number>
+               </property>
+               <item>
+                <layout class="QVBoxLayout" name="graphPlaceholderLayout"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="ratesLayout">
+                 <property name="spacing">
+                  <number>20</number>
+                 </property>
+                 <item>
+                  <spacer name="spRatesTop">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="downMetricLayout">
+                   <property name="spacing">
+                    <number>3</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="lblDownRate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>130</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: #2563eb; font-size: 19px; font-weight: 800;</string>
+                     </property>
+                     <property name="text">
+                      <string>↓ 12.4 Mbps</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lblDownTag">
+                     <property name="text">
+                      <string>DOWNLOAD RATE</string>
+                     </property>
+                     <property name="class" stdset="0">
+                      <string>cardLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="upMetricLayout">
+                   <property name="spacing">
+                    <number>3</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="lblUpRate">
+                     <property name="minimumSize">
+                      <size>
+                       <width>130</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: #9333ea; font-size: 19px; font-weight: 800;</string>
+                     </property>
+                     <property name="text">
+                      <string>↑ 8.1 Mbps</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lblUpTag">
+                     <property name="text">
+                      <string>UPLOAD RATE</string>
+                     </property>
+                     <property name="class" stdset="0">
+                      <string>cardLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="spRatesBottom">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePackets">
+         <layout class="QVBoxLayout" name="pagePacketsLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardPacketControls">
+            <layout class="QVBoxLayout" name="packetControlsLayout">
+             <property name="leftMargin">
               <number>14</number>
              </property>
-             <!-- Card 1: IP Address -->
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>14</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
              <item>
-              <widget class="QFrame" name="cardIp">
-               <layout class="QVBoxLayout" name="cardIpLayout">
-                <property name="leftMargin">
-                 <number>18</number>
-                </property>
-                <property name="topMargin">
-                 <number>14</number>
-                </property>
-                <property name="rightMargin">
-                 <number>18</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>14</number>
-                </property>
-                <property name="spacing">
-                 <number>4</number>
-                </property>
-                <item>
-                 <layout class="QHBoxLayout" name="headIpLayout">
-                  <item>
-                   <widget class="QLabel" name="lblIpTag">
-                    <property name="class" stdset="0">
-                     <string>cardLabel</string>
-                    </property>
-                    <property name="text">
-                     <string>LOCAL IP ADDRESS</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="spHeadIp">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="lblIpBadge">
-                    <property name="text">
-                     <string>IPv4</string>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">color: #2563eb; background: #eff6ff; border: 1px solid #bfdbfe; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblValIp">
-                  <property name="class" stdset="0">
-                   <string>cardValueMedium</string>
-                  </property>
-                  <property name="text">
-                   <string>172.18.144.100</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblIpSub">
-                  <property name="class" stdset="0">
-                   <string>cardSubtext</string>
-                  </property>
-                  <property name="text">
-                   <string>Physical Adapter · Subnet /24</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <layout class="QHBoxLayout" name="toolbarButtonsLayout">
+               <property name="spacing">
+                <number>8</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="btnCaptureStart">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #10b981; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Start Capture</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCaptureStop">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #ef4444; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Stop</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCaptureRestart">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #f1f5f9; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Restart</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnCaptureClear">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #f1f5f9; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Clear</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboCaptureIface">
+                 <property name="minimumSize">
+                  <size>
+                   <width>160</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spToolbarRight">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnOpenPcap">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #f8fafc; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Import PCAP</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnSavePcap">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #f8fafc; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Export PCAP</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblPacketStatus">
+                 <property name="styleSheet">
+                  <string notr="true">color: #475569; font-weight: 600; font-size: 11px; padding: 5px 12px; background: #f1f5f9; border-radius: 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Packets: 0 | Displayed: 0</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="filterBarLayout">
+               <property name="spacing">
+                <number>8</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="lblFilterTag">
+                 <property name="styleSheet">
+                  <string notr="true">font-weight: 700; color: #475569;</string>
+                 </property>
+                 <property name="text">
+                  <string>Filter:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="editPacketFilter">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #ffffff; border: 1px solid #94a3b8; border-radius: 6px; padding: 6px 10px; font-family: 'Consolas', monospace; font-size: 12px;</string>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Display filter (e.g. tcp, udp, dns, icmp, port 443, ip 172.20.10.4)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnApplyFilter">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #2563eb; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Apply</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnClearFilter">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: #f1f5f9; color: #475569; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 14px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Reset</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSplitter" name="splitterPanes">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="handleWidth">
+             <number>6</number>
+            </property>
+            <widget class="QTableWidget" name="tablePackets">
+             <property name="columnCount">
+              <number>7</number>
+             </property>
+             <column>
+              <property name="text">
+               <string>No.</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Time</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Source</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Destination</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Protocol</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Length</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Info</string>
+              </property>
+             </column>
+            </widget>
+            <widget class="QTreeWidget" name="treePacketDetails">
+             <column>
+              <property name="text">
+               <string>Packet Details (Hierarchical Protocol Dissection)</string>
+              </property>
+             </column>
+            </widget>
+            <widget class="QPlainTextEdit" name="txtPacketHex">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageTools">
+         <layout class="QVBoxLayout" name="pageToolsLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardToolsControl">
+            <layout class="QVBoxLayout" name="toolsControlLayout">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>18</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>18</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblToolsTitle">
+               <property name="text">
+                <string>Network Diagnostic Console</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>cardHeader</string>
+               </property>
               </widget>
              </item>
-             <!-- Card 2: Gateway -->
              <item>
-              <widget class="QFrame" name="cardGateway">
-               <layout class="QVBoxLayout" name="cardGwLayout">
-                <property name="leftMargin">
-                 <number>18</number>
-                </property>
-                <property name="topMargin">
-                 <number>14</number>
-                </property>
-                <property name="rightMargin">
-                 <number>18</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>14</number>
-                </property>
-                <property name="spacing">
-                 <number>4</number>
-                </property>
-                <item>
-                 <layout class="QHBoxLayout" name="headGwLayout">
-                  <item>
-                   <widget class="QLabel" name="lblGwTag">
-                    <property name="class" stdset="0">
-                     <string>cardLabel</string>
-                    </property>
-                    <property name="text">
-                     <string>DEFAULT GATEWAY</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="spHeadGw">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="lblGwBadge">
-                    <property name="text">
-                     <string>Router</string>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">color: #7c3aed; background: #f5f3ff; border: 1px solid #ddd6fe; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblValGateway">
-                  <property name="class" stdset="0">
-                   <string>cardValueMedium</string>
-                  </property>
-                  <property name="text">
-                   <string>172.18.144.1</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblGwSub">
-                  <property name="class" stdset="0">
-                   <string>cardSubtext</string>
-                  </property>
-                  <property name="text">
-                   <string>Next-Hop Route · Direct Link</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+              <layout class="QHBoxLayout" name="toolsInputRow">
+               <property name="spacing">
+                <number>10</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="lblTargetTag">
+                 <property name="styleSheet">
+                  <string notr="true">font-weight: 600;</string>
+                 </property>
+                 <property name="text">
+                  <string>Target Host / IP:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="editToolTarget">
+                 <property name="text">
+                  <string>8.8.8.8</string>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Enter IP address or domain (e.g. google.com)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnActionPing">
+                 <property name="text">
+                  <string>Ping</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>pillBtnPrimary</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnActionTraceroute">
+                 <property name="text">
+                  <string>Traceroute</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>pillBtnSecondary</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnActionDns">
+                 <property name="text">
+                  <string>DNS Lookup</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>pillBtnSecondary</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnActionFlushDns">
+                 <property name="text">
+                  <string>Flush DNS</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>pillBtnSecondary</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <!-- Card 3: DNS Server -->
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="cardToolsOutput">
+            <layout class="QVBoxLayout" name="toolsOutputLayout">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>18</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>18</number>
+             </property>
              <item>
-              <widget class="QFrame" name="cardDns">
-               <layout class="QVBoxLayout" name="cardDnsLayout">
-                <property name="leftMargin">
-                 <number>18</number>
-                </property>
-                <property name="topMargin">
-                 <number>14</number>
-                </property>
-                <property name="rightMargin">
-                 <number>18</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>14</number>
-                </property>
-                <property name="spacing">
-                 <number>4</number>
-                </property>
-                <item>
-                 <layout class="QHBoxLayout" name="headDnsLayout">
-                  <item>
-                   <widget class="QLabel" name="lblDnsTag">
-                    <property name="class" stdset="0">
-                     <string>cardLabel</string>
-                    </property>
-                    <property name="text">
-                     <string>PRIMARY RESOLVER</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="spHeadDns">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Horizontal</enum>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="lblDnsBadge">
-                    <property name="text">
-                     <string>UDP/53</string>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">color: #16a34a; background: #f0fdf4; border: 1px solid #bbf7d0; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 6px;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblValDns">
-                  <property name="class" stdset="0">
-                   <string>cardValueMedium</string>
-                  </property>
-                  <property name="text">
-                   <string>8.8.8.8</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblDnsSub">
-                  <property name="class" stdset="0">
-                   <string>cardSubtext</string>
-                  </property>
-                  <property name="text">
-                   <string>Primary Domain Name Server</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <layout class="QHBoxLayout" name="outHeaderLayout">
+               <item>
+                <widget class="QLabel" name="lblConsoleTitle">
+                 <property name="text">
+                  <string>Live Command Output</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>cardHeader</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spConsoleHeader">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnClearConsole">
+                 <property name="styleSheet">
+                  <string notr="true">background: transparent; border: none; color: #64748b; font-size: 11px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Clear Output</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPlainTextEdit" name="txtToolConsole">
+               <property name="styleSheet">
+                <string notr="true">background-color: #0f172a; color: #38bdf8; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; border-radius: 8px; padding: 12px;</string>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
             </layout>
-           </item>
-           <!-- ROW 2: FULL-WIDTH EXPANDED NETWORK OVERVIEW -->
-           <item>
-            <widget class="QFrame" name="cardOverview">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>1</verstretch>
-              </sizepolicy>
-             </property>
-             <layout class="QVBoxLayout" name="overviewLayout">
-              <property name="leftMargin">
-               <number>20</number>
-              </property>
-              <property name="topMargin">
-               <number>18</number>
-              </property>
-              <property name="rightMargin">
-               <number>20</number>
-              </property>
-              <property name="bottomMargin">
-               <number>18</number>
-              </property>
-              <!-- Overview Header -->
-              <item>
-               <layout class="QHBoxLayout" name="overviewHeaderLayout">
-                <item>
-                 <widget class="QLabel" name="lblOverviewTitle">
-                  <property name="class" stdset="0">
-                   <string>cardHeader</string>
-                  </property>
-                  <property name="text">
-                   <string>Network Throughput &amp; Telemetry</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="spOverviewHeader">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblOverviewStatus">
-                  <property name="text">
-                   <string>● Live Telemetry</string>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: #16a34a; font-weight: 600; font-size: 11px;</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <!-- Graph & Rates Row -->
-              <item>
-               <layout class="QHBoxLayout" name="graphAndRatesLayout">
-                <property name="spacing">
-                 <number>20</number>
-                </property>
-                <!-- Large Expanded Graph placeholder -->
-                <item>
-                 <layout class="QVBoxLayout" name="graphPlaceholderLayout"/>
-                </item>
-                <!-- Metrics Column -->
-                <item>
-                 <layout class="QVBoxLayout" name="ratesLayout">
-                  <property name="spacing">
-                   <number>20</number>
-                  </property>
-                  <item>
-                   <spacer name="spRatesTop">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
-                    </property>
-                   </spacer>
-                  </item>
-                  <!-- Down Metric -->
-                  <item>
-                   <layout class="QVBoxLayout" name="downMetricLayout">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="lblDownRate">
-                      <property name="minimumSize">
-                       <size>
-                        <width>130</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>↓ 12.4 Mbps</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: #2563eb; font-size: 19px; font-weight: 800;</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lblDownTag">
-                      <property name="class" stdset="0">
-                       <string>cardLabel</string>
-                      </property>
-                      <property name="text">
-                       <string>DOWNLOAD RATE</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <!-- Up Metric -->
-                  <item>
-                   <layout class="QVBoxLayout" name="upMetricLayout">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="lblUpRate">
-                      <property name="minimumSize">
-                       <size>
-                        <width>130</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>↑ 8.1 Mbps</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: #9333ea; font-size: 19px; font-weight: 800;</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lblUpTag">
-                      <property name="class" stdset="0">
-                       <string>cardLabel</string>
-                      </property>
-                      <property name="text">
-                       <string>UPLOAD RATE</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <spacer name="spRatesBottom">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <!-- PAGE 1: PACKET ANALYZER (WIRESHARK 3-PANE SUITE) -->
-         <widget class="QWidget" name="pagePackets">
-          <layout class="QVBoxLayout" name="pagePacketsLayout">
-           <property name="spacing">
-            <number>10</number>
-           </property>
-           <!-- Capture & Filter Toolbar Card -->
-           <item>
-            <widget class="QFrame" name="cardPacketControls">
-             <layout class="QVBoxLayout" name="packetControlsLayout">
-              <property name="leftMargin"><number>14</number></property>
-              <property name="topMargin"><number>10</number></property>
-              <property name="rightMargin"><number>14</number></property>
-              <property name="bottomMargin"><number>10</number></property>
-              <!-- Top Buttons Row -->
-              <item>
-               <layout class="QHBoxLayout" name="toolbarButtonsLayout">
-                <property name="spacing"><number>8</number></property>
-                <item>
-                 <widget class="QPushButton" name="btnCaptureStart">
-                  <property name="text"><string>Start Capture</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #10b981; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnCaptureStop">
-                  <property name="text"><string>Stop</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #ef4444; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnCaptureRestart">
-                  <property name="text"><string>Restart</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #f1f5f9; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnCaptureClear">
-                  <property name="text"><string>Clear</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #f1f5f9; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="comboCaptureIface">
-                  <property name="minimumSize"><size><width>160</width><height>0</height></size></property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="spToolbarRight">
-                  <property name="orientation"><enum>Qt::Orientation::Horizontal</enum></property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnOpenPcap">
-                  <property name="text"><string>Import PCAP</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #f8fafc; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnSavePcap">
-                  <property name="text"><string>Export PCAP</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #f8fafc; color: #334155; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblPacketStatus">
-                  <property name="text"><string>Packets: 0 | Displayed: 0</string></property>
-                  <property name="styleSheet"><string notr="true">color: #475569; font-weight: 600; font-size: 11px; padding: 5px 12px; background: #f1f5f9; border-radius: 12px;</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <!-- Display Filter Row (Classic Wireshark Filter Bar) -->
-              <item>
-               <layout class="QHBoxLayout" name="filterBarLayout">
-                <property name="spacing"><number>8</number></property>
-                <item>
-                 <widget class="QLabel" name="lblFilterTag">
-                  <property name="text"><string>Filter:</string></property>
-                  <property name="styleSheet"><string notr="true">font-weight: 700; color: #475569;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="editPacketFilter">
-                  <property name="placeholderText"><string>Display filter (e.g. tcp, udp, dns, icmp, port 443, ip 172.20.10.4)</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #ffffff; border: 1px solid #94a3b8; border-radius: 6px; padding: 6px 10px; font-family: 'Consolas', monospace; font-size: 12px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnApplyFilter">
-                  <property name="text"><string>Apply</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #2563eb; color: white; font-weight: 600; border-radius: 6px; padding: 6px 14px;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnClearFilter">
-                  <property name="text"><string>Reset</string></property>
-                  <property name="styleSheet"><string notr="true">background-color: #f1f5f9; color: #475569; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 14px;</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <!-- Signature Wireshark 3-Pane Splitter -->
-           <item>
-            <widget class="QSplitter" name="splitterPanes">
-             <property name="orientation"><enum>Qt::Orientation::Vertical</enum></property>
-             <property name="handleWidth"><number>6</number></property>
-             <!-- PANE 1 (TOP): PACKET LIST TABLE -->
-             <widget class="QTableWidget" name="tablePackets">
-              <property name="columnCount"><number>7</number></property>
-              <column><property name="text"><string>No.</string></property></column>
-              <column><property name="text"><string>Time</string></property></column>
-              <column><property name="text"><string>Source</string></property></column>
-              <column><property name="text"><string>Destination</string></property></column>
-              <column><property name="text"><string>Protocol</string></property></column>
-              <column><property name="text"><string>Length</string></property></column>
-              <column><property name="text"><string>Info</string></property></column>
-             </widget>
-             <!-- PANE 2 (MIDDLE): PACKET DETAILS TREE -->
-             <widget class="QTreeWidget" name="treePacketDetails">
-              <column><property name="text"><string>Packet Details (Hierarchical Protocol Dissection)</string></property></column>
-             </widget>
-             <!-- PANE 3 (BOTTOM): PACKET BYTES (HEX DUMP & ASCII) -->
-             <widget class="QPlainTextEdit" name="txtPacketHex">
-              <property name="readOnly"><bool>true</bool></property>
-             </widget>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <!-- PAGE 2: NETWORK TOOLS -->
-         <widget class="QWidget" name="pageTools">
-          <layout class="QVBoxLayout" name="pageToolsLayout">
-           <property name="spacing">
-            <number>14</number>
-           </property>
-           <item>
-            <widget class="QFrame" name="cardToolsControl">
-             <layout class="QVBoxLayout" name="toolsControlLayout">
-              <property name="leftMargin"><number>20</number></property>
-              <property name="topMargin"><number>18</number></property>
-              <property name="rightMargin"><number>20</number></property>
-              <property name="bottomMargin"><number>18</number></property>
-              <item>
-               <widget class="QLabel" name="lblToolsTitle">
-                <property name="class" stdset="0"><string>cardHeader</string></property>
-                <property name="text"><string>Network Diagnostic Console</string></property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="toolsInputRow">
-                <property name="spacing"><number>10</number></property>
-                <item>
-                 <widget class="QLabel" name="lblTargetTag">
-                  <property name="text"><string>Target Host / IP:</string></property>
-                  <property name="styleSheet"><string notr="true">font-weight: 600;</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="editToolTarget">
-                  <property name="text"><string>8.8.8.8</string></property>
-                  <property name="placeholderText"><string>Enter IP address or domain (e.g. google.com)</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnActionPing">
-                  <property name="class" stdset="0"><string>pillBtnPrimary</string></property>
-                  <property name="text"><string>Ping</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnActionTraceroute">
-                  <property name="class" stdset="0"><string>pillBtnSecondary</string></property>
-                  <property name="text"><string>Traceroute</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnActionDns">
-                  <property name="class" stdset="0"><string>pillBtnSecondary</string></property>
-                  <property name="text"><string>DNS Lookup</string></property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btnActionFlushDns">
-                  <property name="class" stdset="0"><string>pillBtnSecondary</string></property>
-                  <property name="text"><string>Flush DNS</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="cardToolsOutput">
-             <layout class="QVBoxLayout" name="toolsOutputLayout">
-              <property name="leftMargin"><number>20</number></property>
-              <property name="topMargin"><number>18</number></property>
-              <property name="rightMargin"><number>20</number></property>
-              <property name="bottomMargin"><number>18</number></property>
-              <item>
-               <layout class="QHBoxLayout" name="outHeaderLayout">
-                <item>
-                 <widget class="QLabel" name="lblConsoleTitle">
-                  <property name="class" stdset="0"><string>cardHeader</string></property>
-                  <property name="text"><string>Live Command Output</string></property>
-                 </widget>
-                </item>
-                <item><spacer name="spConsoleHeader"/></item>
-                <item>
-                 <widget class="QPushButton" name="btnClearConsole">
-                  <property name="text"><string>Clear Output</string></property>
-                  <property name="styleSheet"><string notr="true">background: transparent; border: none; color: #64748b; font-size: 11px;</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QPlainTextEdit" name="txtToolConsole">
-                <property name="readOnly"><bool>true</bool></property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: #0f172a; color: #38bdf8; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; border-radius: 8px; padding: 12px;</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <!-- PAGE 2: HOSTS MONITOR -->
-         <widget class="QWidget" name="pageHosts">
-          <layout class="QVBoxLayout" name="pageHostsLayout">
-           <property name="spacing"><number>14</number></property>
-           <item>
-            <widget class="QFrame" name="cardHostsToolbar">
-             <layout class="QHBoxLayout" name="hostsToolbarLayout">
-              <property name="leftMargin"><number>20</number></property>
-              <property name="topMargin"><number>14</number></property>
-              <property name="rightMargin"><number>20</number></property>
-              <property name="bottomMargin"><number>14</number></property>
-              <item>
-               <widget class="QLabel" name="lblHostsPageTitle">
-                <property name="class" stdset="0"><string>cardHeader</string></property>
-                <property name="text"><string>Connected Network Hosts &amp; Inventory</string></property>
-               </widget>
-              </item>
-              <item><spacer name="spHostsToolbar"/></item>
-              <item>
-               <widget class="QPushButton" name="btnQuickScan">
-                <property name="class" stdset="0"><string>pillBtnPrimary</string></property>
-                <property name="text"><string>Scan Subnet</string></property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTableWidget" name="tableFullDevices">
-             <property name="minimumHeight"><number>400</number></property>
-             <property name="columnCount"><number>6</number></property>
-             <column><property name="text"><string>Status</string></property></column>
-             <column><property name="text"><string>Device Hostname</string></property></column>
-             <column><property name="text"><string>IP Address</string></property></column>
-             <column><property name="text"><string>MAC Address</string></property></column>
-             <column><property name="text"><string>Role / Reachability</string></property></column>
-             <column><property name="text"><string>Last Seen</string></property></column>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <!-- PAGE 3: PORTS & CONNECTIONS -->
-         <widget class="QWidget" name="pagePorts">
-          <layout class="QVBoxLayout" name="pagePortsLayout">
-           <property name="spacing"><number>14</number></property>
-           <item>
-            <widget class="QFrame" name="cardPortsFilter">
-             <layout class="QHBoxLayout" name="portsFilterLayout">
-              <property name="leftMargin"><number>20</number></property>
-              <property name="topMargin"><number>14</number></property>
-              <property name="rightMargin"><number>20</number></property>
-              <property name="bottomMargin"><number>14</number></property>
-              <item>
-               <widget class="QLabel" name="lblPortsPageTitle">
-                <property name="class" stdset="0"><string>cardHeader</string></property>
-                <property name="text"><string>Active Sockets &amp; Connections Inventory</string></property>
-               </widget>
-              </item>
-              <item><spacer name="spPortsFilter"/></item>
-              <item>
-               <widget class="QLineEdit" name="searchEdit">
-                <property name="placeholderText"><string>Filter by IP, port or protocol...</string></property>
-                <property name="minimumWidth"><number>220</number></property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btnRefreshSockets">
-                <property name="class" stdset="0"><string>pillBtnSecondary</string></property>
-                <property name="text"><string>Refresh Sockets</string></property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblListenHeader">
-             <property name="text"><string>Listening Ports &amp; Local Daemon Services (TCP / UDP)</string></property>
-             <property name="styleSheet"><string notr="true">font-weight: 700; font-size: 13px;</string></property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTableWidget" name="tableListeningSockets">
-             <property name="minimumHeight"><number>180</number></property>
-             <property name="columnCount"><number>5</number></property>
-             <column><property name="text"><string>Protocol</string></property></column>
-             <column><property name="text"><string>State</string></property></column>
-             <column><property name="text"><string>Local Address</string></property></column>
-             <column><property name="text"><string>Port</string></property></column>
-             <column><property name="text"><string>Security Scope</string></property></column>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblActiveHeader">
-             <property name="text"><string>Established Active TCP Network Connections</string></property>
-             <property name="styleSheet"><string notr="true">font-weight: 700; font-size: 13px;</string></property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTableWidget" name="tableActiveSockets">
-             <property name="minimumHeight"><number>180</number></property>
-             <property name="columnCount"><number>4</number></property>
-             <column><property name="text"><string>Protocol</string></property></column>
-             <column><property name="text"><string>State</string></property></column>
-             <column><property name="text"><string>Local Endpoint</string></property></column>
-             <column><property name="text"><string>Peer Endpoint</string></property></column>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <!-- PAGE 4: SETTINGS -->
-         <widget class="QWidget" name="pageSettings">
-          <layout class="QVBoxLayout" name="pageSettingsLayout">
-           <property name="spacing"><number>14</number></property>
-           <item>
-            <widget class="QFrame" name="cardSettingsForm">
-             <layout class="QVBoxLayout" name="settingsFormLayout">
-              <property name="leftMargin"><number>22</number></property>
-              <property name="topMargin"><number>20</number></property>
-              <property name="rightMargin"><number>22</number></property>
-              <property name="bottomMargin"><number>20</number></property>
-              <item>
-               <widget class="QLabel" name="lblSettingsTitle">
-                <property name="class" stdset="0"><string>cardHeader</string></property>
-                <property name="text"><string>Application Preferences</string></property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridSettings">
-                <property name="verticalSpacing"><number>14</number></property>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="lblSetInterval">
-                  <property name="text"><string>Monitoring Refresh Interval:</string></property>
-                  <property name="styleSheet"><string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string></property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QComboBox" name="comboRefreshRate">
-                  <item><property name="text"><string>1 Second (Real-Time)</string></property></item>
-                  <item><property name="text"><string>2 Seconds</string></property></item>
-                  <item><property name="text"><string>5 Seconds</string></property></item>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="lblSetUnits">
-                  <property name="text"><string>Throughput Units:</string></property>
-                  <property name="styleSheet"><string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string></property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QComboBox" name="comboUnits">
-                  <item><property name="text"><string>Mbps (Megabits / second)</string></property></item>
-                  <item><property name="text"><string>MB/s (Megabytes / second)</string></property></item>
-                  <item><property name="text"><string>Kbps (Kilobits / second)</string></property></item>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="lblTelemetryEngine">
-                  <property name="text"><string>Telemetry Engine:</string></property>
-                  <property name="styleSheet"><string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string></property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="lblTelemetryStatus">
-                  <property name="text"><string>● Engine Active (Windows IPHelper + Telemetry Thread)</string></property>
-                  <property name="styleSheet"><string notr="true">color: #16a34a; font-weight: 700; font-size: 12px;</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="settingsBtnLayout">
-                <item><spacer name="spSetBtn"/></item>
-                <item>
-                 <widget class="QPushButton" name="btnApplySettings">
-                  <property name="class" stdset="0"><string>pillBtnPrimary</string></property>
-                  <property name="text"><string>Save Preferences</string></property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
-       </item>
-      </layout>
-     </widget>
+        <widget class="QWidget" name="pageHosts">
+         <layout class="QVBoxLayout" name="pageHostsLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardHostsToolbar">
+            <layout class="QHBoxLayout" name="hostsToolbarLayout">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblHostsPageTitle">
+               <property name="text">
+                <string>Connected Network Hosts &amp; Inventory</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>cardHeader</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spHostsToolbar">
+               <property name="orientation">
+                <enum>Qt::Orientation::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnQuickScan">
+               <property name="text">
+                <string>Scan Subnet</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>pillBtnPrimary</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableFullDevices">
+            <property name="columnCount">
+             <number>6</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Device Hostname</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>IP Address</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>MAC Address</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Role / Reachability</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Last Seen</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePorts">
+         <layout class="QVBoxLayout" name="pagePortsLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardPortsFilter">
+            <layout class="QHBoxLayout" name="portsFilterLayout">
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblPortsPageTitle">
+               <property name="text">
+                <string>Active Sockets &amp; Connections Inventory</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>cardHeader</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spPortsFilter">
+               <property name="orientation">
+                <enum>Qt::Orientation::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="searchEdit">
+               <property name="placeholderText">
+                <string>Filter by IP, port or protocol...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnRefreshSockets">
+               <property name="text">
+                <string>Refresh Sockets</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>pillBtnSecondary</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblListenHeader">
+            <property name="styleSheet">
+             <string notr="true">font-weight: 700; font-size: 13px;</string>
+            </property>
+            <property name="text">
+             <string>Listening Ports &amp; Local Daemon Services (TCP / UDP)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableListeningSockets">
+            <property name="columnCount">
+             <number>5</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>Protocol</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>State</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Local Address</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Port</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Security Scope</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblActiveHeader">
+            <property name="styleSheet">
+             <string notr="true">font-weight: 700; font-size: 13px;</string>
+            </property>
+            <property name="text">
+             <string>Established Active TCP Network Connections</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableActiveSockets">
+            <property name="columnCount">
+             <number>4</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>Protocol</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>State</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Local Endpoint</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Peer Endpoint</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageSettings">
+         <layout class="QVBoxLayout" name="pageSettingsLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="cardSettingsForm">
+            <layout class="QVBoxLayout" name="settingsFormLayout">
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblSettingsTitle">
+               <property name="text">
+                <string>Application Preferences</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>cardHeader</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridSettings">
+               <property name="verticalSpacing">
+                <number>14</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblSetInterval">
+                 <property name="styleSheet">
+                  <string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string>
+                 </property>
+                 <property name="text">
+                  <string>Monitoring Refresh Interval:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboRefreshRate">
+                 <item>
+                  <property name="text">
+                   <string>1 Second (Real-Time)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>2 Seconds</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>5 Seconds</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="lblSetUnits">
+                 <property name="styleSheet">
+                  <string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string>
+                 </property>
+                 <property name="text">
+                  <string>Throughput Units:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboUnits">
+                 <item>
+                  <property name="text">
+                   <string>Mbps (Megabits / second)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>MB/s (Megabytes / second)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Kbps (Kilobits / second)</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="lblTelemetryEngine">
+                 <property name="styleSheet">
+                  <string notr="true">color: #475569; font-size: 12px; font-weight: 600;</string>
+                 </property>
+                 <property name="text">
+                  <string>Telemetry Engine:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="lblTelemetryStatus">
+                 <property name="styleSheet">
+                  <string notr="true">color: #16a34a; font-weight: 700; font-size: 12px;</string>
+                 </property>
+                 <property name="text">
+                  <string>● Engine Active (Windows IPHelper + Telemetry Thread)</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="settingsBtnLayout">
+               <item>
+                <spacer name="spSetBtn">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btnApplySettings">
+                 <property name="text">
+                  <string>Save Preferences</string>
+                 </property>
+                 <property name="class" stdset="0">
+                  <string>pillBtnPrimary</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
